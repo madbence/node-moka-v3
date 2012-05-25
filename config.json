@@ -1,0 +1,16 @@
+{
+	"connection":
+	{
+		"host": "irc6.atw.hu",
+		"port": 6667
+	},
+	"identity":
+	{
+		"nick": "node-moka",
+		"whois": "JavaScript IRC bot"
+	},
+	"logger":
+	{
+		"type": "default"
+	}
+}

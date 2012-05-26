@@ -15,7 +15,7 @@ var DateTime=
 			seconds=date.getSeconds(),
 			seconds2=(seconds>9?'':'0')+seconds,
 			millis=date.getMilliseconds(),
-			millis2=(millis>9?'':'0')+millis;
+			millis2=(millis>9?(millis>99?'':'0'):'00')+millis;
 		return format.
 			replace('Y', year).
 			replace('m', month).

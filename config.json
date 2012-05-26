@@ -1,16 +1,35 @@
 {
 	"connection":
 	{
-		"host": "irc6.atw.hu",
+		"host": "irc.atw.hu",
 		"port": 6667
 	},
 	"identity":
 	{
 		"nick": "node-moka",
+		"realName": "Mr. Moka",
 		"whois": "JavaScript IRC bot"
 	},
 	"logger":
 	{
-		"type": "default"
+		"default":
+		{
+			"enabled": true,
+			"whitelist": [],
+			"blacklist": ["core.connection.*"],
+			"level": "info"
+		}
+	},
+	"plugins":
+	{
+		"autojoin":
+		{
+			"channels": ["#node-csannel"]
+		}
+	},
+	"command":
+	{
+		"usePermissions": false,
+		"prefix": "l\\."
 	}
 }

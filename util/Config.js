@@ -9,13 +9,17 @@ function Config(obj)
 		{
 			var path=name.split('.');
 			var item=config;
+			if(name === '')
+			{
+				return config;
+			}
 			for(var i=0;i<path.length;i++)
 			{
-				item=item[path[i]];
 				if(item === undefined)
 				{
 					throw new Error('Value \''+name+'\' not found (\''+path[i]+'\')');
 				}
+				item=item[path[i]];
 			}
 			return item;
 		},
@@ -37,11 +41,6 @@ Config.fromFile=function(file)
 	{
 		throw new Error('Config file \''+file+'\' is not valid: '+e.message);
 	}
-}
-
-Config.load=function()
-{
-	return Config.fromFile('config.json');
 }
 
 exports.Config=Config;

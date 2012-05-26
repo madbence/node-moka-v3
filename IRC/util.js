@@ -1,13 +1,11 @@
-function isValidMessage(message)
+function message(type, params)
 {
-	return message.match(/^(:(.*?) )?(.*?) (.*?)\r\n$/) !== null;
+	return type.toUpperCase()+' '+params.join(' ')+'\r\n';
 }
 
-function parse(message)
-{
-	if(!isValidMessage(message))
+exports.IRC={
+	'privmsg': function(options)
 	{
-		throw new Error('Message \''+(message.length>33?(message.substr(0,30)+'...'):message)+'\' is not valid.');
+		return message('PRIVMSG', [options['target'], ':'+options['message']]);
 	}
-	
 }

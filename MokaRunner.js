@@ -1,9 +1,11 @@
 var MokaInstanceManager=require('./MokaInstanceManager.js').MokaInstanceManager;
+var MokaConnection=require('./MokaConnection.js').MokaConnection;
 
 function MokaRunner()
 {
 	var config,
-		instanceManager;
+		instanceManager,
+		connection;
 
 	return {
 		'setConfig': function(obj)
@@ -13,10 +15,21 @@ function MokaRunner()
 		'run': function()
 		{
 			instanceManager=new MokaInstanceManager();
-			instanceManager.boot({
-				'host': config.get('connection.host'),
-				'port': config.get('connection.port')||6667
+			instanceManager.start();
+			connection=new MokaConnection(
+				config.get('connection.host'),
+				config.get('connection.port'));
+
+			connection.setMessageHandler(function(data)
+			{
+				instanceManager.sendMessage({
+					'type': 'irc',
+					'message': data});
 			});
+			instanceManager.setMessageHandler(function(data)
+			{
+				connection.sendMessage(data);
+			})
 		}
 	}
 }
